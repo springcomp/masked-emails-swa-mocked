@@ -1,0 +1,27 @@
+{
+  "routes": [
+    {
+      "route": "/api/*",
+      "allowedRoles": ["registered"]
+    },
+    {
+      "route": "/login",
+      "redirect": "/.auth/login/aad?post_login_redirect_uri=/me"
+    },
+    {
+      "route": "/logout",
+      "redirect": "/.auth/logout?post_logout_redirect_uri=/home"
+    },
+    {
+      "route": "/.auth/login/twitter",
+      "statusCode": 404
+    },
+    {
+      "route": "/.auth/login/github",
+      "statusCode": 404
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  }
+}
