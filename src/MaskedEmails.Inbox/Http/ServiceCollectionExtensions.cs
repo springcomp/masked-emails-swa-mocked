@@ -8,7 +8,7 @@ namespace MaskedEmails.Inbox.Http
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection UseInboxApi(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInboxApi(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IRequestToken, RequestToken>();
             services.AddTransient<AuthenticatedParameterizedHttpClientHandler>();
