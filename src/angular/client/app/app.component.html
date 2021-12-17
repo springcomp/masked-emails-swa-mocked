@@ -1,24 +1,8 @@
-<h1>{{ title }}</h1>
+<app-container>
 
-<nav>
-  <a routerLink="/home" routerLinkActive="active">Home</a>
-  <ng-container *ngIf="!authService.getIsAuthenticated(); else logout">
-      <a href="/.auth/login/aad?post_login_redirect_uri=/me">Login</a>
-      <a href="/login?post_login_redirect_uri=/me">Login</a>
-  </ng-container>
-  <ng-template #logout>
-    <a href="/.auth/logout?post_logout_redirect_uri=/home">Logout</a>
-      <a href="/logout?post_logout_redirect_uri=/home">Logout</a>
-  </ng-template>
-  <a routerLink="/me" routerLinkActive="active">Profile</a>
-</nav>
+  <div #scrollMe content class="router" (scroll)="onScroll($event)">
+    <app-loading-screen></app-loading-screen>
+    <router-outlet class="page-content"></router-outlet>
+  </div>
 
-<router-outlet></router-outlet>
-
-<!--
--->
-<div>
-<span>{{ message }}</span>
-</div>
-
-<div> <p>--</p> </div>
+</app-container>

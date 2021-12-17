@@ -1,25 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from './core/auth.service'
-import { ClaimsService } from './services/claims.service';
+import { LoaderService } from './shared/services/loader.service';
+import { ScrollService } from './shared/services/scroll.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  templateUrl: 'app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-app';
+  @ViewChild('scrollMe', { static: true }) private myScrollContainer: ElementRef;
 
-  public message: string | null = null;
-
+  public lock: boolean;
   constructor(
     public authService: AuthService,
-    public claimsService: ClaimsService
-  ){
+    public loaderService: LoaderService,
+    private scrollService: ScrollService
+  ) {
   }
 
-  async ngOnInit() {
-    await this.authService.ngOnInit();
-    this.message = await this.claimsService.getClaims();
+  onScroll($event: any) {
+    if (!this.lock) {
+      this.lock = true;
+      this.scrollService.isScrolledToBottom($event);
+
+      setTimeout(() => {
+        if (this.scrollService.scrollToBottom)
+          this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+      });
+
+      this.lock = false;
+    }
   }
 }

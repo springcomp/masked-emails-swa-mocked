@@ -14,7 +14,6 @@ export class AuthService implements OnInit {
   ) { }
 
   async ngOnInit(){
-    console.log('Auth.Service::ngOnInit()')
     this.clientPrincipal = await this.getClientPrincipal();
   }
 
@@ -32,6 +31,16 @@ export class AuthService implements OnInit {
     this.document.location.href = url;
   }
 
+  public login(): void{
+    const url = '/.auth/login/aad?post_login_redirect_uri=/masked-emails';
+    this.navigate(url);
+  }
+  
+  public logout(): void {
+    const url = '/.auth/logout?post_logout_redirect_uri=/home';
+    this.navigate(url);
+  }
+
   private async getClientPrincipal() {
     try {
       const response = await fetch('/.auth/me');
@@ -39,7 +48,6 @@ export class AuthService implements OnInit {
       const { clientPrincipal } = payload;
       return clientPrincipal;
     } catch (error) {
-      console.error('No profile could be found');
       return undefined;
     }
   }

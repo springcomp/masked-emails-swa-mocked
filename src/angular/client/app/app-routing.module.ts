@@ -1,21 +1,25 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { Err404Component } from './components/err404/err404.component';
-import { HomeComponent } from './components/home/home.component';
-import { MeComponent } from './components/me/me.component';
-import { AuthorizationGuard } from './core/authorizationGuard';
+import { Routes, RouterModule } from '@angular/router';
+
+import { HomeComponent } from './home/home.component'
+import { InboxComponent } from './inbox/inbox.component';
+import { LoginComponent } from './login/login.component';
+import { MaskedEmailsComponent } from './masked-emails/masked-emails.component';
+
+import { AuthorizationGuard } from './core/authorization-guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   { path: 'home', component: HomeComponent },
-  { path: 'me', component: MeComponent, canActivate: [AuthorizationGuard] },
-  { path: '404', component: Err404Component },
-  { path: '**', redirectTo: '/404' }
+  { path: 'login', component: LoginComponent },
+  { path: 'masked-emails', component: MaskedEmailsComponent, canActivate: [AuthorizationGuard]},
+  { path: 'inbox', component: InboxComponent, canActivate: [AuthorizationGuard]},
+
+  { path: '**', redirectTo: 'masked-emails' }
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

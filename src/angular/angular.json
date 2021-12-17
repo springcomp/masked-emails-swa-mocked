@@ -21,8 +21,14 @@
             "main": "client/main.ts",
             "polyfills": "client/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": ["client/favicon.ico", "client/assets"],
-            "styles": ["client/styles.css"],
+            "assets": [
+              "client/favicon.ico",
+              "client/assets"
+            ],
+            "styles": [
+              "client/styles.scss",
+              "client/custom-theme.scss"
+            ],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -33,6 +39,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "65kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "client/environments/environment.ts",
@@ -45,19 +57,7 @@
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
+              "buildOptimizer": true
             }
           },
           "defaultConfiguration": ""
@@ -86,13 +86,23 @@
             "polyfills": "client/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["client/favicon.ico", "client/assets"],
-            "styles": ["client/styles.css"],
+            "assets": [
+              "client/favicon.ico",
+              "client/assets"
+            ],
+            "styles": [
+              "client/styles.css"
+            ],
             "scripts": []
           }
         }
       }
     }
   },
-  "defaultProject": "masked-emails"
+  "defaultProject": "masked-emails",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  }
 }
