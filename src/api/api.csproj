@@ -4,6 +4,7 @@
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>edeac713-beb3-4dfa-a810-839a0b46364c</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <Using Include="Microsoft.AspNetCore.Http" />
@@ -23,9 +24,18 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.14" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.1" />
     <PackageReference Include="Springcomp.Functions.Extensions.StaticWebApps" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CosmosDb.Model\CosmosDb.Model.csproj" />
+    <ProjectReference Include="..\CosmosDb.Utils\CosmosDb.Utils.csproj" />
+    <ProjectReference Include="..\MaskedEmails.Inbox\MaskedEmails.Inbox.csproj" />
+    <ProjectReference Include="..\MaskedEmails.Model\MaskedEmails.Model.csproj" />
+    <ProjectReference Include="..\MaskedEmails.Services\MaskedEmails.Services.csproj" />
+    <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
