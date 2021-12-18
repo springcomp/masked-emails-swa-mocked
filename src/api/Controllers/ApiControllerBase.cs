@@ -15,7 +15,6 @@ public class ApiControllerBase
         if (claim == null) return false;
 
         identifier = claim.Value;
-        identifier = "a1118e83-92e6-4465-91e1-7595d060195c";
         return true;
     }
 

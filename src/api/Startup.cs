@@ -1,6 +1,7 @@
 ﻿using CosmosDb.Model;
 using CosmosDb.Model.Configuration;
 using CosmosDb.Model.Interop;
+using CosmosDb.Model.Shim;
 using CosmosDb.Utils;
 using CosmosDb.Utils.Interop;
 using MaskedEmails.Inbox.Http;
@@ -41,7 +42,7 @@ public class Startup : FunctionsStartup
     public static void ConfigureDependencies(IServiceCollection services, IConfiguration configuration)
     {
         services.AddSingleton<ICosmosDbClientFactory, CosmosDbClientFactory>();
-        services.AddTransient<ICosmosDbContext, CosmosDbContext>();
+        services.AddTransient<ICosmosDbContext, CosmosDbContextShim>();
         services.AddTransient<ICosmosOperations>(provider =>
         {
             var clientFactory = provider.GetRequiredService<ICosmosDbClientFactory>();

@@ -10,19 +10,19 @@ using System.Linq;
 
 namespace CosmosDb.Model
 {
-    public sealed class CosmosDbContext : ICosmosDbContext
+    public class CosmosDbContext : ICosmosDbContext
     {
-        private readonly ICosmosOperations operations_;
+        protected readonly ICosmosOperations operations_;
 
-        private Database database_;
-        private Container container_;
+        protected Database database_;
+        protected Container container_;
 
         public CosmosDbContext(ICosmosOperations operations)
         {
             operations_ = operations;
         }
 
-        public async Task<Profile> GetProfile(string userId)
+        public virtual async Task<Profile> GetProfile(string userId)
         {
             InitializeContext();
 
@@ -39,7 +39,7 @@ namespace CosmosDb.Model
             }
         }
 
-        public async Task InserProfile(Profile profile)
+        public virtual async Task InserProfile(Profile profile)
         {
             Database database = await operations_.CreateDatabaseIfNotExistsAsync(Constants.DatabaseId);
             Container container = await operations_.CreateContainerIfNotExistsAsync(database, Constants.ContainerName, Constants.PartitionKeyPath);
@@ -47,7 +47,7 @@ namespace CosmosDb.Model
             await operations_.CreateItemAsync(container, profile, profile.Partition);
         }
 
-        public async Task<Address> QueryAddress(string email)
+        public virtual async Task<Address> QueryAddress(string email)
         {
             await foreach (var page in QueryProfiles())
                 foreach (var profile in page)
@@ -63,19 +63,19 @@ namespace CosmosDb.Model
             return null;
         }
 
-        public IAsyncEnumerable<Page<Profile>> QueryProfiles()
+        public virtual IAsyncEnumerable<Page<Profile>> QueryProfiles()
         {
             InitializeContext();
 
             return operations_.QueryItemsAsync<Profile>(container_, Constants.QueryProfilesStatement);
         }
 
-        public async Task UpdateProfile(Profile profile)
+        public virtual async Task UpdateProfile(Profile profile)
         {
             await operations_.ReplaceItemAsync(container_, profile, profile.Partition);
         }
 
-        private void InitializeContext()
+        protected void InitializeContext()
         {
             database_ = database_ ?? operations_.GetDatabase(Constants.DatabaseId);
             container_ = container_ ?? operations_.GetContainer(database_, Constants.ContainerName);
