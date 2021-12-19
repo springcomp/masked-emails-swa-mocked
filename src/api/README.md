@@ -19,6 +19,9 @@ This project makes use of some configuration parameters. Most of which can be st
 
 - `TableStorage:ConnectionString`: connection string to an Azure Storage Account.
 
+- `AppSettings:DomainName`: Top-level domain name for generated email addresses.
+- `AppSettings:PasswordLength`: Length of auto-generated passwords.
+
 - `CosmosDb:EndpointUri`: URI to the CosmosDb service.
 - `CosmosDb:PrimaryKey`: primary key to the CosmosDb service.
 - `CosmosDb:IgnoreSslServerCertificateValidation`: set to `true` to ignore certificate validation, useful when running the CosmosDb emulator from a Docker container, for instance. Defaults to `false`.

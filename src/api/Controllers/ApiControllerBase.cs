@@ -38,6 +38,10 @@ public class ApiControllerBase
     {
         return new OkObjectResult(@object);
     }
+    protected static IActionResult StatusCode(int statusCode)
+    {
+        return new StatusCodeResult(statusCode);
+    }
 
     protected static T GetQueryParameter<T>(HttpRequest req, string name, T defaultValue)
     {
