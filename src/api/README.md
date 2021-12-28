@@ -5,7 +5,7 @@ When run locally, this project is hosted on port 5001.
 
 ## Prerequisites
 
-The WebAPI stored its data into a CosmosDb database.
+The WebAPI stores its data into a CosmosDb database.
 You can use the [CosmosDb Emulator](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator) to debug locally.
 
 The WebAPI also sends commands to the mail server using an Azure Storage Account queue. You can use [Azurite Local Storage Emulator](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azurite) to debug locally.
