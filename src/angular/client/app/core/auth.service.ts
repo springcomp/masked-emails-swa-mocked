@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, OnInit, Inject } from '@angular/core';
-import { UserInfo } from '../models/userInfo';
+import { UserInfo } from '../shared/models/userInfo';
 
 @Injectable({
   providedIn: 'root'
