@@ -2,7 +2,7 @@ import { AuthService } from '../core/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Profile } from '../shared/models/model';
-import { ProfileService, Claim } from '../shared/services/profile.service';
+import { ProfileService } from '../shared/services/profile.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,7 +16,6 @@ export class AppContainerComponent implements OnInit {
   public isAuthenticated: boolean = false;
 
   public my: Profile | undefined = undefined;
-  public claims: Claim[] = [];
 
   constructor(
     private profileService: ProfileService,
@@ -70,7 +69,5 @@ export class AppContainerComponent implements OnInit {
   private loadProfile(): void {
     this.profileService.getProfile()
       .subscribe(profile => this.my = profile);
-    this.profileService.getClaims()
-      .subscribe(claims => this.claims = claims);
   }
 }

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable} from 'rxjs';
 
 import { HttpService } from './http.service';
 import { Profile } from '../models/model';
-
-export class Claim { type: string; value: string; }
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +25,5 @@ export class ProfileService {
     var headers = { headers: this.helpers.getHeaders() };
     var requestUri = this.helpers.getRequestUri("/api/profiles/my");
     return this.http.patch<Profile>(requestUri, profile, headers);
-  }
-
-  public getClaims(): Observable<Claim[]> {
-    var headers = { headers: this.helpers.getHeaders() };
-    var requestUri = this.helpers.getRequestUri("/api/claims");
-    return this.http.get<Claim[]>(requestUri, headers);
   }
 }
