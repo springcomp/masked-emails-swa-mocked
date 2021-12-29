@@ -10,7 +10,7 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { AuthorizationGuard } from './core/authorization-guard';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/home' },
+  { path: '', pathMatch: 'full', redirectTo: '/masked-emails' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'masked-emails', component: MaskedEmailsComponent, canActivate: [AuthorizationGuard]},
