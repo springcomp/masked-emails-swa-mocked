@@ -1,0 +1,16 @@
+@import '../../custom-theme.scss';
+
+.unauthorized-wrapper {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  width: 50%;
+}
+
+.unauthorized {
+  margin: auto;
+  font-size: small;
+}

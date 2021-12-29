@@ -26,10 +26,17 @@ export class AuthorizationGuard implements CanActivate, CanLoad {
     return observable.pipe(map(() => {
       const isAuthenticated = this.authService.getIsAuthenticated();
       if (!isAuthenticated) {
-        var redirect: string = '/.auth/login/aad'
+        var redirect: string = '/.auth/login/aad';
         if (route != null) {
           redirect += `?post_login_redirect_uri=/${route}`;
         }
+        this.authService.navigate(redirect);
+        return false;
+      }
+
+      const isAuthorized = this.authService.getIsAuthorized();
+      if (!isAuthorized) {
+        const redirect: string =  '/unauthorized';
         this.authService.navigate(redirect);
         return false;
       }
