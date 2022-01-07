@@ -206,6 +206,7 @@ namespace MaskedEmails.Services
                 EmailAddress = emailAddress,
                 EnableForwarding = enableForwarding,
                 CreatedUtc = DateTime.UtcNow,
+                Profile = record,
             };
 
             record.Addresses.Add(address);

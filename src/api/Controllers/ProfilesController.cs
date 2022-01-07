@@ -77,7 +77,7 @@ public sealed class ProfilesController : ApiControllerBase
 							request.Name,
 							request.PasswordHash,
 							request.Description,
-							request.EnableForwarding
+							request.ForwardingEnabled
 							);
 			}
 
@@ -89,7 +89,7 @@ public sealed class ProfilesController : ApiControllerBase
 							email,
 							request.PasswordHash,
 							request.Description,
-							request.EnableForwarding
+							request.ForwardingEnabled
 							);
 			}
 
