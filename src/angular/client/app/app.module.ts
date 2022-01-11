@@ -7,7 +7,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GravatarModule } from 'ngx-gravatar';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 //Import material module
@@ -37,6 +37,9 @@ import { MessageContentMobileViewComponent } from './messages/message-content-mo
 import { MessageContentViewComponent } from './messages/message-content-view/message-content-view.component';
 import { MessagesTableMobileViewComponent } from './messages/messages-table-mobile-view/messages-table-mobile-view.component';
 import { MessagesTableViewComponent } from './messages/messages-table-view/messages-table-view.component';
+
+import { MockedHttpProfileInterceptor } from './shared/interceptors/mocked-http-profile.interceptor';
+import { MockedHttpAddressInterceptor } from './shared/interceptors/mocked-http-address.interceptor';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,16 @@ import { MessagesTableViewComponent } from './messages/messages-table-view/messa
   ],
   providers: [
     AuthorizationGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MockedHttpAddressInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MockedHttpProfileInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })
