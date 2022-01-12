@@ -22,11 +22,10 @@ jobs:
         registry-url: https://registry.npmjs.org
 
     - name: 🏗 npm install and npm run build
+      working-directory: ./src/angular
       run: |
         npm i
         npm run build
-        with:
-          working-directory: ./src/angular
    
     - name: 🔒 authenticate
       uses: azure/login@v1
