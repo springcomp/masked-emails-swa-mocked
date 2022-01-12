@@ -18,13 +18,13 @@ export class AuthService implements OnInit {
   }
 
   public getIsAuthenticated(): boolean {
-    return this.getIsInRole('authenticated');
+    return true;
   }
   public getIsAuthorized(): boolean {
-    return this.getIsInRole('registered');
+    return true;
   }
   public getIsInRole(roleName: string): boolean {
-    return (this.clientPrincipal != undefined && this.clientPrincipal.userRoles.indexOf(roleName) != -1); 
+    return true;
   }
 
   public navigate(url: string): void {
@@ -32,23 +32,22 @@ export class AuthService implements OnInit {
   }
 
   public login(): void{
-    const url = '/.auth/login/aad?post_login_redirect_uri=/masked-emails';
+    const url = '/masked-emails';
     this.navigate(url);
   }
   
   public logout(): void {
-    const url = '/.auth/logout?post_logout_redirect_uri=/home';
+    const url = '/home';
     this.navigate(url);
   }
 
   private async getClientPrincipal() {
-    try {
-      const response = await fetch('/.auth/me');
-      const payload = await response.json();
-      const { clientPrincipal } = payload;
-      return clientPrincipal;
-    } catch (error) {
-      return undefined;
-    }
+    const principal: UserInfo = {
+      identityProvider: 'aad',
+      userId: '3a15a264-cf52-4d51-9df6-d27d28301c71',
+      userDetails: 'Alice',
+      userRoles: ['anonymous', 'authenticated', 'registered']
+    };
+    return principal;
   }
 }
