@@ -12,14 +12,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: 📚 Checkout
+    - name: 📚 checkout
       uses: actions/checkout@v2
-    - name: 🔒 Authenticate
+
+    - name: 🟢 node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+        registry-url: https://registry.npmjs.org
+
+    - name: 🏗 npm install and npm run build
+      run: |
+        npm i
+        npm run build
+        with:
+          working-directory: ./src/angular
+   
+    - name: 🔒 authenticate
       uses: azure/login@v1
       with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: 🌏 Upload to blob storage
+    - name: 🌏 upload to blob storage
       uses: azure/CLI@v1
       with:
         inlineScript: |
-            az storage blob upload-batch --account-name mockedemails --auth-mode key -d '$web' -s .
+            az storage blob upload-batch --account-name mockedemails --auth-mode key -d '$web' -s ./src/angular/dist/masked-emails/
