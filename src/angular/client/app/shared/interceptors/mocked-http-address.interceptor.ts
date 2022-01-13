@@ -1,7 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
-import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { AddressPages, MaskedEmail } from '../models/model';
+import { Address, AddressPages, MaskedEmail, MaskedEmailRequest } from '../models/model';
 
 const addresses: MaskedEmail[] = [
   {
@@ -360,6 +360,29 @@ export class MockedHttpAddressInterceptor implements HttpInterceptor {
     if (req.urlWithParams.endsWith('/api/profiles/my'))
       return next.handle(req);
 
+    if (req.urlWithParams.endsWith('api/profiles/my/addresses'))
+      return this.createNewAddress(req);
+
+    return this.displayAddresses(req);
+  }
+
+  createNewAddress(req: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const words = ["lorem", "ipsum", "dolor", "sit", "amet"];
+    const index = Math.floor(Math.random() * words.length);
+    const request: MaskedEmailRequest = req.body;
+    const address: MaskedEmail = {
+      name: request.name,
+      description: request.description,
+      forwardToEmailAddress: 'alice@example.com',
+      forwardingEnabled: true,
+      emailAddress: `${words[index]}@domain.tld`,
+      password: 'random-generated-password'
+    };
+
+    return of(new HttpResponse({ status: 201, body: address }));
+  }
+
+  private displayAddresses(req: HttpRequest<any>): Observable<HttpEvent<any>> {
     var top = this.getTop(req.urlWithParams);
     var cursor = this.getCursor(req.urlWithParams);
 
