@@ -195,7 +195,7 @@ export class AddressesComponent implements OnInit {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(data);
 
-    this.scrollService.scrollToBottom = true;
+    this.scrollService.scrollToBottom = false;
     this.scrollToBottom = this.scrollService.scrollToBottom;
     this.lock = false;
     this.isSearching = false;
