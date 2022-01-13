@@ -14,6 +14,9 @@
       </mat-form-field>
     </div>
     <button mat-fab color="primary" (click)="openCreateDialog()"><fa-icon [icon]="['fas', 'plus']"></fa-icon></button>
+    <div class="diagnostics">
+      <input matInput [ngModel]='scrollToBottom'>
+    </div>
   </div>
 
   <div class="table-view table-container">

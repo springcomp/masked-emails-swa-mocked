@@ -19,12 +19,16 @@ export class ScrollService {
   }
 
   public isScrolledToBottom($event): void {
+    console.log(`offsetHeight: ${$event.target.offsetHeight}`);
+    console.log(`scrollTop: ${$event.target.scrollTop}`);
+    console.log(`scrollHeight: ${$event.target.scrollHeight}`);
     if ($event && $event.target.offsetHeight + $event.target.scrollTop >= $event.target.scrollHeight) {
       this.scrollToBottom = true;
      
     } else {
       this.scrollToBottom = false;
     }
+    console.log(`scrollToBottom: ${this.scrollToBottom}`);
   }
 
 }

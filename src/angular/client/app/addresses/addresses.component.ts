@@ -30,7 +30,7 @@ export class AddressesComponent implements OnInit {
 
   public pageResult: AddressPages;
   public searchValue: string;
-  public diagnostics: string;
+  public scrollToBottom: boolean;
 
   public addresses: MaskedEmail[] = [];
   public dataSource: MatTableDataSource<MaskedEmail>;
@@ -195,8 +195,8 @@ export class AddressesComponent implements OnInit {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(data);
 
-    this.scrollService.scrollToBottom = false;
-    this.diagnostics = `scrolledToBottom? ${this.scrollService.scrollToBottom.toString()}`;
+    this.scrollService.scrollToBottom = true;
+    this.scrollToBottom = this.scrollService.scrollToBottom;
     this.lock = false;
     this.isSearching = false;
     this.lockAddresses = false;
